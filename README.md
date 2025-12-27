@@ -81,3 +81,117 @@ A_T = A.T  # or np.transpose(A)
 7. **Computer Graphics**: Transforming coordinate systems, rotating objects, and applying transformations.
 
 See the [transpose example](./transpose/transpose_example.py) for more detailed demonstrations.
+
+### Matrix Determinant
+
+The **determinant** is a scalar value computed from a square matrix that provides crucial information about the matrix's properties. For a 2×2 matrix A = [[a, b], [c, d]], the determinant is det(A) = ad - bc.
+
+#### Example
+
+Given a 2×2 matrix:
+```
+A = [[3, 1],
+     [2, 4]]
+```
+
+The determinant is:
+```
+det(A) = 3×4 - 1×2 = 12 - 2 = 10
+```
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[3, 1],
+              [2, 4]])
+
+det_A = np.linalg.det(A)
+# Result: 10.0
+```
+
+#### Why Determinant is Useful
+
+1. **Invertibility Test**: A matrix is invertible (has an inverse) if and only if det(A) ≠ 0. If det(A) = 0, the matrix is singular and cannot be inverted.
+
+2. **Volume/Area Scaling**: In 2D, the absolute value of the determinant represents the area scaling factor of the linear transformation. In 3D, it represents volume scaling. This is crucial in geometry and computer graphics.
+
+3. **Linear Independence**: Zero determinant indicates that the rows (or columns) of the matrix are linearly dependent, meaning one can be expressed as a combination of others.
+
+4. **Solving Linear Systems**: Used in Cramer's rule for solving systems of linear equations. Also determines if a system has a unique solution (det ≠ 0) or infinite/no solutions (det = 0).
+
+5. **Eigenvalues**: The product of all eigenvalues of a matrix equals its determinant. This connects determinants to many eigenvalue-based applications.
+
+6. **Matrix Properties**: 
+   - det(A^T) = det(A) - determinant of transpose equals original
+   - det(AB) = det(A) × det(B) - determinant of product
+   - det(kA) = k^n × det(A) - scalar multiplication (n is dimension)
+
+7. **Applications**:
+   - **Computer Graphics**: Determining if transformations preserve orientation, calculating areas/volumes
+   - **Machine Learning**: Feature selection, checking for multicollinearity in datasets
+   - **Physics**: Calculating moments, analyzing stability of systems
+   - **Cryptography**: Some encryption algorithms use determinants
+
+See the [determinant example](./determinant/determinant_example.py) for more detailed demonstrations.
+
+### Dot Product
+
+The **dot product** (also called scalar product or inner product) is an operation that takes two vectors and returns a scalar value. For vectors **a** = [a₁, a₂, ..., aₙ] and **b** = [b₁, b₂, ..., bₙ], the dot product is: **a · b** = a₁b₁ + a₂b₂ + ... + aₙbₙ.
+
+#### Example
+
+Given two vectors:
+```
+a = [1, 2, 3]
+b = [4, 5, 6]
+```
+
+The dot product is:
+```
+a · b = 1×4 + 2×5 + 3×6 = 4 + 10 + 18 = 32
+```
+
+In NumPy:
+```python
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+dot_product = np.dot(a, b)  # or a @ b
+# Result: 32
+```
+
+#### Why Dot Product is Useful
+
+1. **Geometric Interpretation**: The dot product equals **a · b = ||a|| ||b|| cos(θ)**, where θ is the angle between vectors. This allows us to:
+   - Find angles between vectors
+   - Determine if vectors are perpendicular (orthogonal when dot product = 0)
+   - Calculate projections of one vector onto another
+
+2. **Vector Magnitude**: The length (magnitude) of a vector can be computed as ||v|| = √(v · v), which is fundamental in distance calculations.
+
+3. **Linear Transformations**: Matrix-vector multiplication (A @ v) is computed using dot products - each row of the matrix is dotted with the vector.
+
+4. **Machine Learning & Data Science**:
+   - **Neural Networks**: Computing weighted sums in neurons (activation = weights · inputs + bias)
+   - **Similarity Measures**: Cosine similarity uses dot product to measure how similar two vectors are
+   - **Recommendation Systems**: Finding similar users/items based on dot product of feature vectors
+   - **Clustering**: Distance calculations in K-means and other algorithms
+
+5. **Computer Graphics**:
+   - **Lighting Calculations**: Computing how much light hits a surface (dot product of normal vector and light direction)
+   - **Visibility Testing**: Determining if objects face the camera
+   - **Shading**: Phong and Blinn-Phong shading models use dot products
+
+6. **Signal Processing**: Correlation between signals, filtering operations, and feature extraction.
+
+7. **Physics**: 
+   - **Work**: Work done by a force is the dot product of force and displacement vectors
+   - **Energy**: Potential energy calculations
+   - **Torque**: Angular momentum calculations
+
+8. **Optimization**: Many optimization algorithms (gradient descent, etc.) rely on dot products to compute gradients and update parameters.
+
+See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
