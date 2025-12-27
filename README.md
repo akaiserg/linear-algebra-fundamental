@@ -195,3 +195,59 @@ dot_product = np.dot(a, b)  # or a @ b
 8. **Optimization**: Many optimization algorithms (gradient descent, etc.) rely on dot products to compute gradients and update parameters.
 
 See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
+
+### Euclidean Norm
+
+The **Euclidean norm** (also called L2 norm) measures the length or magnitude of a vector. For a vector **v** = [v₁, v₂, ..., vₙ], the Euclidean norm is: **||v||** = √(v₁² + v₂² + ... + vₙ²).
+
+#### Example
+
+Given a vector:
+```
+v = [3, 4]
+```
+
+The Euclidean norm is:
+```
+||v|| = √(3² + 4²) = √(9 + 16) = √25 = 5
+```
+
+In NumPy:
+```python
+import numpy as np
+
+v = np.array([3, 4])
+norm = np.linalg.norm(v)
+# Result: 5.0
+```
+
+#### Why Euclidean Norm is Useful
+
+1. **Distance Measurement**: The Euclidean norm represents the distance from the origin to a point. The distance between two points **a** and **b** is **||a - b||**, which is fundamental in geometry, clustering algorithms, and spatial analysis.
+
+2. **Vector Magnitude**: Provides a measure of the "size" or "length" of a vector, essential for understanding vector quantities in physics and engineering.
+
+3. **Unit Vectors**: Normalizing a vector (dividing by its norm) creates a unit vector with length 1, preserving direction but removing magnitude. This is crucial in computer graphics, physics, and machine learning.
+
+4. **Machine Learning & Data Science**:
+   - **L2 Regularization**: Penalizes large weights using the squared Euclidean norm
+   - **Loss Functions**: Mean Squared Error (MSE) uses squared Euclidean norm
+   - **K-means Clustering**: Uses Euclidean distance to assign points to clusters
+   - **Feature Normalization**: Scaling features to unit vectors for better model performance
+   - **Similarity Measures**: Many similarity metrics are based on Euclidean distance
+
+5. **Computer Graphics**:
+   - **Normalizing Direction Vectors**: Creating unit vectors for lighting calculations
+   - **Distance Calculations**: Determining object positions and collisions
+   - **Rendering**: Normalizing surface normals for shading
+
+6. **Optimization**: 
+   - **Convergence Criteria**: Checking if gradient norm is below threshold
+   - **Gradient Descent**: Step sizes often depend on norm calculations
+   - **Regularization**: L2 regularization prevents overfitting
+
+7. **Physics**: Representing magnitudes of physical quantities like force, velocity, acceleration, and electric fields.
+
+8. **Matrix Norms**: The Frobenius norm (treating matrix as vector) is used in matrix analysis, optimization, and machine learning (e.g., matrix factorization).
+
+See the [Euclidean norm example](./euclidean_norm/euclidean_norm_example.py) for more detailed demonstrations.
