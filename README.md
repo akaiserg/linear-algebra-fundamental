@@ -251,3 +251,68 @@ norm = np.linalg.norm(v)
 8. **Matrix Norms**: The Frobenius norm (treating matrix as vector) is used in matrix analysis, optimization, and machine learning (e.g., matrix factorization).
 
 See the [Euclidean norm example](./euclidean_norm/euclidean_norm_example.py) for more detailed demonstrations.
+
+### Linear Combination, Basis, Span, and Rank
+
+These fundamental concepts describe how vectors relate to each other and the spaces they create.
+
+#### Key Concepts
+
+1. **Linear Combination**: A vector formed by scaling and adding other vectors: **c₁v₁ + c₂v₂ + ... + cₙvₙ**
+
+2. **Linear Independence**: Vectors are linearly independent if no vector can be written as a linear combination of the others. Check by: `rank(matrix) = number of vectors`
+
+3. **Span**: The set of all possible linear combinations of vectors. Represents all vectors that can be "reached" using those vectors.
+
+4. **Basis**: A set of vectors that are linearly independent and span the entire space. The standard basis for ℝⁿ has vectors with 1 in one position and 0 elsewhere.
+
+5. **Rank**: The dimension of the column space (span of columns), equal to the number of linearly independent columns.
+
+#### Example
+
+```python
+import numpy as np
+
+# Linear combination
+v1 = np.array([1, 0])
+v2 = np.array([0, 1])
+result = 2*v1 + 3*v2  # [2, 3]
+
+# Check linear independence
+A = np.column_stack([v1, v2])
+rank = np.linalg.matrix_rank(A)  # 2
+is_independent = (rank == A.shape[1])  # True
+
+# Matrix rank
+A = np.array([[1, 2, 3],
+              [0, 1, 2],
+              [0, 0, 1]])
+rank = np.linalg.matrix_rank(A)  # 3
+```
+
+#### Why These Concepts Are Useful
+
+1. **Understanding Vector Spaces**: Basis and span define the structure and dimensionality of vector spaces, fundamental to all linear algebra.
+
+2. **Solving Linear Systems**: Rank determines if systems have unique solutions, infinite solutions, or no solutions. If `rank(A) = rank([A|b])`, the system has solutions.
+
+3. **Dimensionality Analysis**: Rank gives the true dimension of the space spanned by columns, revealing redundancy in data.
+
+4. **Machine Learning & Data Science**:
+   - **Feature Space**: Understanding which features are redundant (linearly dependent)
+   - **Dimensionality Reduction**: PCA uses rank to find lower-dimensional representations
+   - **Overfitting**: Rank relates to model complexity and capacity
+   - **Feature Selection**: Identifying linearly independent features
+
+5. **Data Analysis**: 
+   - **Multicollinearity**: Detecting when features are linearly dependent
+   - **Data Compression**: Rank indicates minimum dimensions needed to represent data
+   - **Signal Processing**: Basis functions for representing signals efficiently
+
+6. **Computer Graphics**: Basis vectors define coordinate systems, transformations, and rotations.
+
+7. **Optimization**: Rank constraints in optimization problems, understanding feasible regions.
+
+8. **Cryptography**: Basis vectors used in lattice-based cryptography.
+
+See the [linear combination, basis, span, and rank example](./linear_combination_basis_span_rank/linear_combination_basis_span_rank_example.py) for more detailed demonstrations.
