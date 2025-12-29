@@ -8,11 +8,11 @@ dot product
 
 euclidian norm
 
-cosine similarity 
+linear combination, Basis and span 
 
----Basis and span 
+- cosine similarity 
 
-out product
+matrox multiplication
 
 inverse matrix
 
@@ -20,7 +20,7 @@ identity matrix
 
 Linear equation
 
-null space and nullity and kjernel 
+null space and nullity and kernel 
 
 Eigenvector and eigenvalues
 
@@ -28,3 +28,4 @@ Diagonalization
 
 matrix SVD 
 
+-- other outer produuct

@@ -252,6 +252,152 @@ norm = np.linalg.norm(v)
 
 See the [Euclidean norm example](./euclidean_norm/euclidean_norm_example.py) for more detailed demonstrations.
 
+### Cosine Similarity
+
+**Cosine similarity** measures the cosine of the angle between two vectors. It's a scale-invariant measure of orientation (direction) rather than magnitude. For vectors **a** and **b**, cosine similarity is: **cosine_similarity = (a · b) / (||a|| ||b||)** = **cos(θ)**, where θ is the angle between the vectors.
+
+#### Example
+
+Given two vectors:
+```
+a = [1, 0]
+b = [1, 1]
+```
+
+The cosine similarity is:
+```
+cosine_similarity = (1×1 + 0×1) / (1 × √2) = 1/√2 ≈ 0.7071
+```
+
+This equals cos(45°) = √2/2 ≈ 0.7071
+
+In NumPy:
+```python
+import numpy as np
+
+a = np.array([1, 0])
+b = np.array([1, 1])
+
+cosine_sim = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+# Result: 0.7071 (cos(45°))
+```
+
+#### Why Cosine Similarity is Useful
+
+1. **Scale-Invariant**: Unlike Euclidean distance, cosine similarity only depends on the angle between vectors, not their magnitudes. This makes it ideal for comparing vectors of different scales.
+
+2. **Information Retrieval & Search**:
+   - **Document Similarity**: Finding similar documents based on word frequencies (TF-IDF vectors)
+   - **Search Engines**: Ranking search results by relevance
+   - **Text Classification**: Grouping similar documents
+
+3. **Recommendation Systems**:
+   - **User Similarity**: Finding users with similar preferences
+   - **Item Similarity**: Recommending items similar to user's past choices
+   - **Collaborative Filtering**: "Users who liked X also liked Y"
+
+4. **Machine Learning & Data Science**:
+   - **Feature Similarity**: Measuring how similar features are across samples
+   - **Clustering**: Grouping similar data points (K-means with cosine distance)
+   - **Classification**: Using similarity as a distance metric
+   - **Dimensionality Reduction**: Preserving similarity relationships
+
+5. **Natural Language Processing**:
+   - **Word Embeddings**: Comparing word vectors (Word2Vec, GloVe, BERT)
+   - **Document Embeddings**: Finding semantically similar documents
+   - **Semantic Search**: Finding documents with similar meaning
+   - **Sentiment Analysis**: Comparing text sentiment vectors
+
+6. **Computer Vision**:
+   - **Image Similarity**: Finding similar images based on feature vectors
+   - **Face Recognition**: Comparing face embeddings
+   - **Object Matching**: Matching objects across images
+
+7. **Advantages over Euclidean Distance**:
+   - **Normalized Range**: Always in [-1, 1], easy to interpret
+   - **Direction Focus**: Captures similarity in orientation, not just proximity
+   - **Robust to Magnitude**: Works well when vector magnitudes vary significantly
+
+8. **Interpretation**:
+   - **1**: Vectors point in the same direction (maximum similarity)
+   - **0**: Vectors are perpendicular (no similarity)
+   - **-1**: Vectors point in opposite directions (maximum dissimilarity)
+
+See the [cosine similarity example](./cosine_similarity/cosine_similarity_example.py) for more detailed demonstrations.
+
+### Cosine Similarity
+
+**Cosine similarity** measures the cosine of the angle between two vectors, indicating how similar their directions are regardless of their magnitudes. It's calculated as: **cos(θ) = (a · b) / (||a|| ||b||)**.
+
+#### Example
+
+Given two vectors:
+```
+a = [1, 2]
+b = [2, 4]
+```
+
+The cosine similarity is:
+```
+cos(θ) = (1×2 + 2×4) / (√(1²+2²) × √(2²+4²))
+       = 10 / (√5 × √20)
+       = 10 / 10
+       = 1.0
+```
+
+In NumPy:
+```python
+import numpy as np
+
+a = np.array([1, 2])
+b = np.array([2, 4])
+
+cosine_sim = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+# Result: 1.0 (vectors point in the same direction)
+```
+
+#### Why Cosine Similarity is Useful
+
+1. **Text Analysis & NLP**:
+   - **Document Similarity**: Comparing documents using word frequency vectors (TF-IDF) to find similar articles, papers, or content
+   - **Search Engines**: Ranking search results by similarity to the query vector
+   - **Recommendation Systems**: Finding similar articles, products, or content based on user preferences
+   - **Clustering**: Grouping similar documents together in topic modeling
+
+2. **Machine Learning**:
+   - **Feature Similarity**: Measuring similarity between feature vectors in high-dimensional spaces
+   - **Recommendation Systems**: User-item similarity in collaborative filtering (e.g., Netflix, Amazon)
+   - **Clustering Algorithms**: K-means variants using cosine distance instead of Euclidean distance
+   - **Neural Networks**: Attention mechanisms and similarity layers use cosine similarity
+
+3. **Information Retrieval**:
+   - **Search**: Finding relevant documents/items based on query similarity
+   - **Ranking**: Ordering results by relevance to a query
+   - **Deduplication**: Finding duplicate or near-duplicate content
+
+4. **Computer Vision**:
+   - **Image Similarity**: Comparing image feature vectors extracted from deep learning models
+   - **Face Recognition**: Comparing face embeddings to identify or verify individuals
+   - **Object Detection**: Measuring similarity between object features
+
+5. **Natural Language Processing**:
+   - **Word Embeddings**: Measuring similarity between word vectors (Word2Vec, GloVe, BERT)
+   - **Sentence Embeddings**: Comparing sentence representations for semantic similarity
+   - **Semantic Search**: Finding semantically similar text regardless of exact word matches
+
+6. **Key Advantages**:
+   - **Scale-Invariant**: Works well with vectors of different magnitudes (only direction matters)
+   - **Efficient**: Fast to compute, especially with sparse vectors
+   - **Interpretable**: Easy to understand (angle between vectors, range [-1, 1])
+   - **Normalized**: Always in [-1, 1], making comparisons meaningful across different vector scales
+
+7. **Relationship to Other Concepts**:
+   - Combines **dot product** and **Euclidean norm** in a normalized way
+   - Directly related to the angle between vectors: `θ = arccos(cosine_similarity)`
+   - When vectors are normalized, cosine similarity equals their dot product
+
+See the [cosine similarity example](./cosine_similarity/cosine_similarity_example.py) for more detailed demonstrations.
+
 ### Linear Combination, Basis, Span, and Rank
 
 These fundamental concepts describe how vectors relate to each other and the spaces they create.
