@@ -135,6 +135,76 @@ det_A = np.linalg.det(A)
 
 See the [determinant example](./determinant/determinant_example.py) for more detailed demonstrations.
 
+### Matrix Inverse
+
+The **inverse** of a square matrix A, denoted as A^(-1), is a matrix such that A × A^(-1) = A^(-1) × A = I, where I is the identity matrix. A matrix is invertible (non-singular) if and only if its determinant is not zero.
+
+#### Example
+
+Given a matrix:
+```
+A = [[3, 1],
+     [2, 4]]
+```
+
+The inverse A^(-1) is:
+```
+A^(-1) = [[ 0.4, -0.1],
+          [-0.2,  0.3]]
+```
+
+Verification: A × A^(-1) = I
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[3, 1],
+              [2, 4]])
+
+A_inv = np.linalg.inv(A)
+# Result: [[ 0.4, -0.1],
+#          [-0.2,  0.3]]
+
+# Verify: A @ A_inv should equal identity matrix
+identity_check = A @ A_inv
+```
+
+#### Why Matrix Inverse is Useful
+
+1. **Solving Linear Systems**: The primary use is solving systems of linear equations Ax = b by computing x = A^(-1) b. However, `np.linalg.solve(A, b)` is preferred for numerical stability.
+
+2. **Change of Basis**: Transforming coordinates between different coordinate systems or bases, essential in computer graphics and robotics.
+
+3. **Matrix Decompositions**: Used in LU decomposition, QR decomposition, and other matrix factorization techniques that are fundamental to numerical linear algebra.
+
+4. **Computer Graphics**:
+   - **Transformations**: Inverting transformation matrices to reverse rotations, scaling, or translations
+   - **Camera Systems**: Converting between world coordinates and camera coordinates
+   - **Animation**: Reversing transformations for undo operations
+
+5. **Machine Learning & Data Science**:
+   - **Ridge Regression**: Regularized linear regression uses matrix inverses
+   - **Covariance Matrices**: Computing precision matrices (inverse of covariance)
+   - **Kalman Filters**: State estimation in control systems and tracking
+   - **Gaussian Processes**: Computing posterior distributions
+
+6. **Control Theory**: System analysis, controller design, and stability analysis of dynamic systems.
+
+7. **Cryptography**: Some encryption algorithms use matrix inverses for encoding and decoding.
+
+8. **Economics**: Input-output models, Leontief models, and economic equilibrium calculations.
+
+9. **Key Properties**:
+   - **(A^(-1))^(-1) = A** - Double inverse returns original
+   - **(A^T)^(-1) = (A^(-1))^T** - Inverse of transpose
+   - **(AB)^(-1) = B^(-1) A^(-1)** - Inverse of product (order reverses!)
+   - **det(A^(-1)) = 1 / det(A)** - Determinant of inverse
+
+10. **Important Note**: Not all matrices are invertible. A matrix must be square and have a non-zero determinant. Matrices with det(A) = 0 are called **singular** and cannot be inverted.
+
+See the [inverse matrix example](./inverse_matrix/inverse_matrix_example.py) for more detailed demonstrations.
+
 ### Dot Product
 
 The **dot product** (also called scalar product or inner product) is an operation that takes two vectors and returns a scalar value. For vectors **a** = [a₁, a₂, ..., aₙ] and **b** = [b₁, b₂, ..., bₙ], the dot product is: **a · b** = a₁b₁ + a₂b₂ + ... + aₙbₙ.
@@ -195,6 +265,60 @@ dot_product = np.dot(a, b)  # or a @ b
 8. **Optimization**: Many optimization algorithms (gradient descent, etc.) rely on dot products to compute gradients and update parameters.
 
 See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
+
+### Identity Matrix
+
+The **identity matrix** is a square matrix with 1s on the main diagonal and 0s everywhere else. It acts as the multiplicative identity for matrices, meaning that multiplying any matrix by the identity matrix leaves it unchanged.
+
+#### Example
+
+A 3×3 identity matrix:
+```
+I = [[1, 0, 0],
+     [0, 1, 0],
+     [0, 0, 1]]
+```
+
+In NumPy:
+```python
+import numpy as np
+
+# Create identity matrix
+I = np.eye(3)  # or np.identity(3)
+
+# Verify: A @ I = A
+A = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+result = A @ I  # Result equals A
+```
+
+#### Why Identity Matrix is Useful
+
+1. **Multiplicative Identity**: Acts as "1" for matrices - A @ I = I @ A = A for any matrix A. This is fundamental to matrix algebra.
+
+2. **Matrix Inverses**: The defining property of inverse matrices is A @ A^(-1) = A^(-1) @ A = I. Identity is central to understanding and computing inverses.
+
+3. **Linear Transformations**: Represents the "do nothing" transformation in linear algebra - no change to vectors or coordinate systems.
+
+4. **Solving Linear Systems**: Used in Gaussian elimination, matrix factorization, and various algorithms for solving Ax = b.
+
+5. **Regularization in Machine Learning**: 
+   - **Ridge Regression**: Uses (A^T A + λI)^(-1) to prevent overfitting
+   - **Neural Networks**: Identity matrices used in skip connections (ResNet architecture)
+   - **Regularization**: Adding λI to matrices to ensure invertibility
+
+6. **Eigenvalue Problems**: Identity matrix has eigenvalue 1 with multiplicity n, fundamental in eigenvalue decomposition.
+
+7. **Matrix Decomposition**: Used in various factorization techniques like LU decomposition, QR decomposition, and SVD.
+
+8. **Computer Graphics**: Represents no transformation in coordinate systems and transformations.
+
+9. **Control Theory**: Used in state-space representations and system analysis.
+
+10. **Numerical Methods**: Identity matrix is used as starting point in iterative algorithms and as a reference for matrix operations.
+
+See the [identity matrix example](./identity_matrix/identity_matrix_example.py) for more detailed demonstrations.
 
 ### Matrix Multiplication
 
