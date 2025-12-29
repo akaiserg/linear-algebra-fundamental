@@ -196,6 +196,82 @@ dot_product = np.dot(a, b)  # or a @ b
 
 See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
 
+### Matrix Multiplication
+
+Matrix multiplication is a fundamental operation that combines two matrices to produce a third matrix. For matrices A (m×n) and B (n×p), the product C = AB is an m×p matrix where each element C[i,j] is the dot product of row i of A and column j of B.
+
+#### Example
+
+Given two matrices:
+```
+A = [[1, 2],
+     [3, 4]]
+
+B = [[5, 6],
+     [7, 8]]
+```
+
+The product A @ B is:
+```
+A @ B = [[1×5 + 2×7, 1×6 + 2×8],
+         [3×5 + 4×7, 3×6 + 4×8]]
+      = [[19, 22],
+         [43, 50]]
+```
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+result = A @ B  # or np.dot(A, B) or np.matmul(A, B)
+# Result: [[19, 22],
+#         [43, 50]]
+```
+
+#### Why Matrix Multiplication is Useful
+
+1. **Linear Transformations**: Representing rotations, scaling, shearing, reflections, and other geometric transformations. Each transformation can be encoded as a matrix, and applying multiple transformations is done through matrix multiplication.
+
+2. **Solving Linear Systems**: Systems of linear equations can be written as Ax = b, where matrix multiplication is fundamental to finding solutions.
+
+3. **Computer Graphics**:
+   - **3D Transformations**: Rotating, scaling, and translating 3D objects
+   - **Projection**: Converting 3D coordinates to 2D screen coordinates
+   - **Animation**: Combining multiple transformations over time
+
+4. **Machine Learning & Deep Learning**:
+   - **Neural Networks**: Forward propagation is essentially matrix multiplication (weights @ inputs + bias)
+   - **Backpropagation**: Gradient calculations use matrix multiplication
+   - **Feature Transformations**: Applying learned transformations to data
+   - **Convolutional Layers**: Efficiently implemented using matrix multiplication
+
+5. **Data Processing**:
+   - **Feature Engineering**: Combining features through matrix operations
+   - **Dimensionality Reduction**: PCA, SVD use matrix multiplication
+   - **Data Transformations**: Applying filters and transformations
+
+6. **Quantum Mechanics**: Representing quantum states and operations as matrices, where matrix multiplication represents state evolution.
+
+7. **Economics & Operations Research**:
+   - **Input-Output Models**: Analyzing economic relationships
+   - **Markov Chains**: State transitions represented as matrix multiplication
+   - **Optimization Problems**: Linear programming uses matrix operations
+
+8. **Signal Processing**: Filtering, convolution, and transformations are implemented using matrix multiplication.
+
+9. **Key Properties**:
+   - **Associative**: (AB)C = A(BC) - allows efficient computation
+   - **Distributive**: A(B + C) = AB + AC - simplifies calculations
+   - **NOT Commutative**: AB ≠ BA in general - order matters!
+   - **Transpose**: (AB)^T = B^T A^T - order reverses when transposing
+
+See the [matrix multiplication example](./matrix_multiplication/matrix_multiplication_example.py) for more detailed demonstrations.
+
 ### Euclidean Norm
 
 The **Euclidean norm** (also called L2 norm) measures the length or magnitude of a vector. For a vector **v** = [v₁, v₂, ..., vₙ], the Euclidean norm is: **||v||** = √(v₁² + v₂² + ... + vₙ²).
