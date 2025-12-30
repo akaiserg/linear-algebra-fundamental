@@ -16,16 +16,17 @@ matrix multiplication
 
 inverse matrix
 
--- identity matrix
+
+identity matrix
 
 Linear equation
 
 null space and nullity and kernel 
 
-Eigenvector and eigenvalues
+-- Eigenvector and eigenvalues
 
 Diagonalization
 
-matrix SVD 
+matrix SVD (singular value decomposition )
 
 -- other outer produuct

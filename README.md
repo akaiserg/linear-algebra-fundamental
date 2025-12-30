@@ -25,6 +25,7 @@ Core linear algebra concepts implemented in Python
 
 - Python 3.8+
 - NumPy >= 1.24.0
+- SciPy >= 1.10.0 (for null space calculations)
 
 ## Concepts
 
@@ -265,6 +266,144 @@ dot_product = np.dot(a, b)  # or a @ b
 8. **Optimization**: Many optimization algorithms (gradient descent, etc.) rely on dot products to compute gradients and update parameters.
 
 See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
+
+### Null Space, Nullity, and Kernel
+
+The **null space** (also called **kernel**) of a matrix A is the set of all vectors **x** such that **Ax = 0**. The **nullity** is the dimension of the null space.
+
+#### Example
+
+Given a matrix:
+```
+A = [[1, 2],
+     [2, 4]]
+```
+
+The null space consists of all vectors x such that Ax = 0:
+```
+x1 + 2x2 = 0  →  x1 = -2x2
+```
+
+So the null space is spanned by the vector [-2, 1] (or any scalar multiple).
+
+In NumPy/SciPy:
+```python
+import numpy as np
+from scipy.linalg import null_space
+
+A = np.array([[1, 2],
+              [2, 4]])
+
+# Find null space
+null_space_vectors = null_space(A)
+nullity = null_space_vectors.shape[1]  # Dimension of null space
+```
+
+#### Why Null Space is Useful
+
+1. **Solving Linear Systems**: Determines if Ax = b has unique solutions
+   - If nullity > 0, there are infinitely many solutions (if solution exists)
+   - If nullity = 0, solution is unique (if it exists)
+
+2. **Rank-Nullity Theorem**: `rank(A) + nullity(A) = number of columns`. This fundamental relationship connects rank and nullity.
+
+3. **Linear Independence**: Nullity > 0 indicates linearly dependent columns. If nullity = 0, columns are linearly independent.
+
+4. **Eigenvalue Problems**: Null space of (A - λI) gives eigenvectors corresponding to eigenvalue λ.
+
+5. **Machine Learning**:
+   - **Regularization**: Understanding overfitting through null space analysis
+   - **Feature Selection**: Identifying redundant features (columns in null space)
+   - **Dimensionality Reduction**: PCA and other techniques use null space concepts
+
+6. **Signal Processing**: Finding signals that map to zero (null space filtering), noise cancellation.
+
+7. **Control Theory**: Analyzing system controllability and observability, understanding system behavior.
+
+8. **Computer Graphics**: Finding transformations that map to zero, understanding geometric relationships.
+
+9. **Data Analysis**: Identifying redundant information, understanding data structure, detecting multicollinearity.
+
+See the [null space example](./null_space/null_space_example.py) for more detailed demonstrations.
+
+### Linear Equations
+
+Linear equations are fundamental mathematical expressions that can be represented in both **vector form** and **matrix form**. A system of linear equations can be written as **Ax = b**, where A is the coefficient matrix, x is the variable vector, and b is the constant vector.
+
+#### Example
+
+**Vector Form:**
+```
+3x + 4y = 10
+```
+In vector form: `[3, 4] · [x, y] = 10`
+
+**Matrix Form:**
+```
+2x + 3y = 7
+4x + 5y = 13
+```
+
+In matrix form:
+```python
+A = [[2, 3],     x = [x,     b = [7,
+     [4, 5]]         y]          13]
+```
+
+Solving in NumPy:
+```python
+import numpy as np
+
+A = np.array([[2, 3],
+              [4, 5]])
+b = np.array([7, 13])
+
+x = np.linalg.solve(A, b)
+# Result: [2.0, 1.0]
+```
+
+#### Why Linear Equations are Useful
+
+1. **Universal Problem Solver**: Many real-world problems can be modeled as systems of linear equations, from engineering calculations to economic models.
+
+2. **Types of Systems**:
+   - **Unique Solution**: When det(A) ≠ 0, use `np.linalg.solve(A, b)`
+   - **Overdetermined**: More equations than unknowns - use least squares (`np.linalg.lstsq()`)
+   - **Underdetermined**: More unknowns than equations - use pseudo-inverse (`np.linalg.pinv()`)
+   - **Homogeneous**: Ax = 0 - always has trivial solution x = 0
+
+3. **Engineering Applications**:
+   - **Circuit Analysis**: Solving for currents and voltages in electrical circuits
+   - **Structural Mechanics**: Finding forces and stresses in structures
+   - **Fluid Dynamics**: Modeling flow and pressure
+
+4. **Machine Learning & Data Science**:
+   - **Linear Regression**: Fitting lines/planes to data (solving Ax = b)
+   - **Neural Networks**: Forward and backward propagation involve solving linear systems
+   - **Optimization**: Many optimization problems reduce to solving linear equations
+
+5. **Computer Graphics**:
+   - **Transformations**: Applying rotations, scaling, translations (matrix operations)
+   - **3D Rendering**: Projecting 3D coordinates to 2D screen space
+   - **Lighting Calculations**: Computing illumination using linear equations
+
+6. **Economics & Finance**:
+   - **Supply and Demand**: Modeling market equilibrium
+   - **Portfolio Optimization**: Finding optimal asset allocations
+   - **Input-Output Models**: Analyzing economic systems
+
+7. **Scientific Computing**:
+   - **Differential Equations**: Discretizing and solving PDEs leads to linear systems
+   - **Finite Element Method**: Solving partial differential equations
+   - **Signal Processing**: Filtering and reconstruction
+
+8. **Numerical Methods**: Linear equations are the foundation for:
+   - Gaussian elimination
+   - LU decomposition
+   - QR decomposition
+   - Iterative solvers (for large sparse systems)
+
+See the [linear equations example](./linear_equations/linear_equations_example.py) for more detailed demonstrations.
 
 ### Identity Matrix
 
