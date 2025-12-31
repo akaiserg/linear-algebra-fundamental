@@ -79,13 +79,9 @@ def exercise_4():
                   [2, 4, 6],
                   [3, 6, 9]])
     
-    # TODO: Calculate rank using SVD (count non-zero singular values)
-    # Hint: Use a tolerance for floating point comparison (e.g., 1e-10)
-    # Your code here:
-    result = None  # Replace None with rank (integer)
-    
-    return result
-
+  
+    S = np.linalg.svd(A, compute_uv=False)
+    return np.sum(S > 1e-10)
 
 def exercise_5():
     """
@@ -104,13 +100,12 @@ def exercise_5():
                   [7, 8, 9]])
     k = 1
     
-    # TODO: Perform SVD and create rank-k approximation
-    # Hint: Keep only the first k singular values and corresponding vectors
-    # Your code here:
-    result = None  # Replace None with rank-k approximation
-    
-    return result
-
+   
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+    U_k = U[:, :k]
+    S_k = S[:k]
+    Vt_k = Vt[:k, :]
+    return U_k @ np.diag(S_k) @ Vt_k
 
 def exercise_6():
     """
@@ -127,11 +122,11 @@ def exercise_6():
     A = np.array([[1, 2],
                   [3, 4]])
     
-    # TODO: Perform SVD and verify U and V are orthogonal
-    # Your code here:
-    result = None  # Replace None with True or False
-    
-    return result
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+    left_side = U.T @ U
+    right_side = np.eye(U.shape[1])
+    return np.allclose(left_side, right_side)
+
 
 
 def exercise_7():
@@ -149,12 +144,10 @@ def exercise_7():
     A = np.array([[1, 2],
                   [3, 4]])
     
-    # TODO: Compare singular values of A and A^T
-    # Your code here:
-    result = None  # Replace None with True or False
-    
-    return result
-
+  
+    S_A = np.linalg.svd(A, compute_uv=False)
+    S_AT = np.linalg.svd(A.T, compute_uv=False)
+    return np.allclose(S_A, S_AT)
 
 def exercise_8():
     """
@@ -172,12 +165,9 @@ def exercise_8():
                   [4, 5, 6],
                   [7, 8, 9]])
     
-    # TODO: Get singular values and return count
-    # Your code here:
-    result = None  # Replace None with number of singular values
     
-    return result
-
+    S = np.linalg.svd(A, compute_uv=False)
+    return len(S)
 
 def exercise_9():
     """
@@ -195,12 +185,9 @@ def exercise_9():
     A = np.array([[1, 2, 3, 4],
                   [5, 6, 7, 8]])
     
-    # TODO: Perform SVD and return shapes
-    # Your code here:
-    result = None  # Replace None with ((U_rows, U_cols), S_length, (V_rows, V_cols))
-    
-    return result
-
+   
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+    return (U.shape, len(S), Vt.shape)
 
 def exercise_10():
     """
@@ -227,11 +214,11 @@ def exercise_10():
                   [9, 10, 11, 12]])
     k = 2
     
-    # TODO: Calculate compression ratio
-    # Your code here:
-    result = None  # Replace None with compression ratio (float)
-    
-    return result
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+    m, n = A.shape
+    original_size = m * n
+    compressed_size = m * k + k + n * k
+    return original_size / compressed_size
 
 
 # ============================================================================

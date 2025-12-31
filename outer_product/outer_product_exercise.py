@@ -23,12 +23,8 @@ def exercise_1():
     a = np.array([1, 2, 3])
     b = np.array([4, 5])
     
-    # TODO: Calculate the outer product of a and b
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
-
+   
+    return np.outer(a, b)
 
 def exercise_2():
     """
@@ -44,11 +40,8 @@ def exercise_2():
     a = np.array([2, 3])
     b = np.array([5, 7, 9])
     
-    # TODO: Calculate outer product using np.outer()
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
+   
+    return np.outer(a, b)
 
 
 def exercise_3():
@@ -65,12 +58,7 @@ def exercise_3():
     a = np.array([1, 2])
     b = np.array([3, 4, 5])
     
-    # TODO: Calculate outer product using reshape and @ operator
-    # Hint: outer(a, b) = a.reshape(-1, 1) @ b.reshape(1, -1)
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
+    return a.reshape(-1, 1) @ b.reshape(1, -1)
 
 
 def exercise_4():
@@ -85,11 +73,9 @@ def exercise_4():
     b = np.array([3, 4])
     c = np.array([5, 6])
     
-    # TODO: Compute (a + b) ⊗ c and a ⊗ c + b ⊗ c, then compare
-    # Your code here:
-    result = None  # Replace None with True or False
-    
-    return result
+    left_side = np.outer(a + b, c)
+    right_side = np.outer(a, c) + np.outer(b, c)
+    return np.allclose(left_side, right_side)
 
 
 def exercise_5():
@@ -104,12 +90,11 @@ def exercise_5():
     b = np.array([4, 5])
     k = 3
     
-    # TODO: Compute (ka) ⊗ b, k(a ⊗ b), and a ⊗ (kb), then compare
-    # Your code here:
-    result = None  # Replace None with True or False
-    
-    return result
-
+   
+    left_side = np.outer(k * a, b)
+    right_side = k * np.outer(a, b)
+    third_side = np.outer(a, k * b)
+    return np.allclose(left_side, right_side) and np.allclose(right_side, third_side) and np.allclose(left_side, third_side)
 
 def exercise_6():
     """
@@ -126,12 +111,10 @@ def exercise_6():
     a = np.array([1, 2, 3])
     b = np.array([4, 5, 6])
     
-    # TODO: Calculate both outer product and dot product
-    # Your code here:
-    result = None  # Replace None with (outer_product, dot_product)
-    
-    return result
-
+   
+    outer_product = np.outer(a, b)
+    dot_product = np.dot(a, b)
+    return (outer_product, dot_product)
 
 def exercise_7():
     """
@@ -148,11 +131,8 @@ def exercise_7():
     a = np.array([2, 3, 4])
     b = np.array([5, 6])
     
-    # TODO: Calculate the rank of the outer product matrix
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
+   
+    return np.linalg.matrix_rank(np.outer(a, b))
 
 
 def exercise_8():
@@ -170,12 +150,8 @@ def exercise_8():
     a = np.array([1, 2, 3, 4])
     b = np.array([5, 6, 7])
     
-    # TODO: Calculate the shape of the outer product
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
-
+   
+    return np.outer(a, b).shape
 
 def exercise_9():
     """
@@ -188,11 +164,8 @@ def exercise_9():
     
     Return the resulting matrix.
     """
-    # TODO: Create e1 = [1, 0] and compute e1 ⊗ e1
-    # Your code here:
-    result = None  # Replace None with your solution
-    
-    return result
+   
+    return np.outer(np.array([1, 0]), np.array([1, 0]))
 
 
 def exercise_10():
@@ -206,12 +179,10 @@ def exercise_10():
     a = np.array([1, 2, 3])
     b = np.array([4, 5])
     
-    # TODO: Compute (a ⊗ b)^T and b ⊗ a, then compare
-    # Your code here:
-    result = None  # Replace None with True or False
-    
-    return result
-
+   
+    left_side = np.outer(a, b).T
+    right_side = np.outer(b, a)
+    return np.allclose(left_side, right_side)
 
 # ============================================================================
 # Test your solutions
