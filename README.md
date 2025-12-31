@@ -867,3 +867,93 @@ eigenvalues, eigenvectors = np.linalg.eig(A)
 12. **Geometric Interpretation**: Eigenvectors point in directions preserved by the transformation, while eigenvalues tell us how much vectors in those directions are stretched (λ > 1), compressed (0 < λ < 1), or flipped (λ < 0).
 
 See the [eigenvalues example](./eigenvalues/eigenvalues_example.py) for more detailed demonstrations.
+
+### Matrix Diagonalization
+
+**Diagonalization** is the process of decomposing a square matrix A into the form **A = P D P^(-1)**, where D is a diagonal matrix containing the eigenvalues of A, and P is an invertible matrix whose columns are the corresponding eigenvectors.
+
+#### Example
+
+Given a matrix:
+```
+A = [[4, 1],
+     [2, 3]]
+```
+
+After diagonalization:
+```
+A = P D P^(-1)
+
+where:
+D = [[5, 0],    (eigenvalues on diagonal)
+     [0, 2]]
+
+P = [[eigenvector1, eigenvector2]]  (eigenvectors as columns)
+```
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[4, 1],
+              [2, 3]])
+
+# Find eigenvalues and eigenvectors
+eigenvalues, eigenvectors = np.linalg.eig(A)
+
+# Create diagonal matrix
+D = np.diag(eigenvalues)
+
+# Matrix P is the eigenvectors (as columns)
+P = eigenvectors
+P_inv = np.linalg.inv(P)
+
+# Verify: A = P D P^(-1)
+reconstructed = P @ D @ P_inv
+```
+
+#### Why Diagonalization is Useful
+
+1. **Matrix Powers**: Computing A^k becomes much easier: **A^k = P D^k P^(-1)**
+   - D^k is simply raising diagonal entries to power k
+   - Avoids expensive repeated matrix multiplications
+   - Essential for Markov chains, system dynamics
+
+2. **Matrix Functions**: Can compute functions like e^A, sin(A), log(A) using diagonalization by applying the function to the eigenvalues.
+
+3. **System of Differential Equations**: Diagonalization simplifies solving systems of linear differential equations by decoupling them.
+
+4. **Principal Component Analysis (PCA)**: Uses diagonalization of the covariance matrix to find principal components for dimensionality reduction in machine learning and data analysis.
+
+5. **Quantum Mechanics**: Diagonalization of Hamiltonian matrices to find energy states and eigenfunctions.
+
+6. **Markov Chains**: Finding steady-state distributions and transition probabilities using diagonalization.
+
+7. **Data Analysis & Machine Learning**:
+   - **Dimensionality Reduction**: PCA for feature extraction
+   - **Clustering**: Spectral clustering uses diagonalization
+   - **Feature Extraction**: Finding important directions in data
+
+8. **Optimization**: Understanding system behavior, analyzing stability of dynamic systems, and finding optimal solutions.
+
+9. **Signal Processing**: Filtering, noise reduction, and frequency domain analysis.
+
+10. **Engineering Applications**:
+    - **Control Systems**: Analyzing system stability and designing controllers
+    - **Structural Analysis**: Vibration analysis, modal analysis
+    - **Circuit Analysis**: Solving electrical networks
+
+11. **Key Properties**:
+    - **A = P D P^(-1)**: The fundamental diagonalization equation
+    - **det(A) = product of eigenvalues**: Determinant equals product of diagonal entries of D
+    - **trace(A) = sum of eigenvalues**: Trace equals sum of diagonal entries of D
+    - **Symmetric matrices are always diagonalizable** with orthogonal eigenvectors
+    - **Matrices with distinct eigenvalues are always diagonalizable**
+
+12. **When is a Matrix Diagonalizable?**
+    - Has n linearly independent eigenvectors (where n is the dimension)
+    - Symmetric matrices: always diagonalizable
+    - Matrices with distinct eigenvalues: always diagonalizable
+    - A matrix is **not diagonalizable** (defective) if it has repeated eigenvalues but not enough linearly independent eigenvectors
+
+See the [diagonalization example](./diagonalization/diagonalization_example.py) for more detailed demonstrations.
