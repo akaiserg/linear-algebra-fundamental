@@ -801,3 +801,69 @@ rank = np.linalg.matrix_rank(A)  # 3
 8. **Cryptography**: Basis vectors used in lattice-based cryptography.
 
 See the [linear combination, basis, span, and rank example](./linear_combination_basis_span_rank/linear_combination_basis_span_rank_example.py) for more detailed demonstrations.
+
+### Eigenvalues and Eigenvectors
+
+**Eigenvalues** and **eigenvectors** are fundamental concepts that reveal important properties of linear transformations. For a square matrix **A**, an eigenvector **v** (nonzero vector) and its corresponding eigenvalue λ satisfy: **Av = λv**. This means when matrix **A** acts on eigenvector **v**, the result is simply a scalar multiple of **v** (scaled by λ).
+
+#### Example
+
+Given a matrix:
+```
+A = [[4, 1],
+     [2, 3]]
+```
+
+The eigenvalues and eigenvectors satisfy:
+```
+Av = λv
+```
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[4, 1],
+              [2, 3]])
+
+eigenvalues, eigenvectors = np.linalg.eig(A)
+# eigenvalues: array of eigenvalues
+# eigenvectors: matrix where each column is an eigenvector
+```
+
+#### Why Eigenvalues and Eigenvectors are Useful
+
+1. **Principal Component Analysis (PCA)**: Finding directions of maximum variance in data, essential for dimensionality reduction in machine learning and data science.
+
+2. **Google PageRank Algorithm**: The PageRank algorithm finds the dominant eigenvector of the web graph to rank web pages by importance.
+
+3. **Vibration Analysis**: In mechanical engineering, eigenvalues represent natural frequencies and eigenvectors represent vibration modes of structures.
+
+4. **Quantum Mechanics**: Energy levels correspond to eigenvalues, and quantum states correspond to eigenvectors of the Hamiltonian operator.
+
+5. **Image Processing**: Used in compression algorithms, feature extraction, and image recognition systems.
+
+6. **Machine Learning**:
+   - **Dimensionality Reduction**: PCA uses eigenvectors to reduce data dimensions
+   - **Clustering**: Spectral clustering uses eigenvalues/eigenvectors
+   - **Recommender Systems**: Collaborative filtering algorithms
+   - **Neural Networks**: Understanding network dynamics and optimization
+
+7. **Differential Equations**: Solving systems of linear differential equations, finding stable and unstable solutions.
+
+8. **Stability Analysis**: In control theory, eigenvalues determine if systems are stable (negative real parts) or unstable (positive real parts).
+
+9. **Graph Theory**: Finding communities in networks, computing centrality measures, analyzing social networks.
+
+10. **Data Science**: Understanding data structure, finding principal directions of variation, detecting anomalies.
+
+11. **Key Properties**:
+    - **Sum of eigenvalues = Trace**: Σλᵢ = trace(A) where trace is the sum of diagonal elements
+    - **Product of eigenvalues = Determinant**: Πλᵢ = det(A)
+    - **A and A^T have the same eigenvalues** (but different eigenvectors in general)
+    - **Symmetric matrices always have real eigenvalues**
+    - **Eigenvalue decomposition**: A = PΛP⁻¹ where P contains eigenvectors and Λ contains eigenvalues
+
+12. **Geometric Interpretation**: Eigenvectors point in directions preserved by the transformation, while eigenvalues tell us how much vectors in those directions are stretched (λ > 1), compressed (0 < λ < 1), or flipped (λ < 0).
+
+See the [eigenvalues example](./eigenvalues/eigenvalues_example.py) for more detailed demonstrations.
