@@ -267,6 +267,77 @@ dot_product = np.dot(a, b)  # or a @ b
 
 See the [dot product example](./dot_product/dot_product_example.py) for more detailed demonstrations.
 
+### Outer Product
+
+The **outer product** (also called tensor product) of two vectors creates a matrix where each element (i, j) is the product of the i-th element of the first vector and the j-th element of the second vector. For vectors **a** = [a₁, a₂, ..., aₘ] and **b** = [b₁, b₂, ..., bₙ], the outer product **a ⊗ b** is an m×n matrix.
+
+#### Example
+
+Given two vectors:
+```
+a = [1, 2, 3]
+b = [4, 5]
+```
+
+The outer product is:
+```
+a ⊗ b = [[1×4, 1×5],
+         [2×4, 2×5],
+         [3×4, 3×5]] = [[4,  5],
+                        [8, 10],
+                        [12, 15]]
+```
+
+In NumPy:
+```python
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5])
+
+outer_product = np.outer(a, b)
+# Result: [[4,  5],
+#          [8, 10],
+#          [12, 15]]
+
+# Alternative: using matrix multiplication
+outer_product = a.reshape(-1, 1) @ b.reshape(1, -1)
+```
+
+#### Why Outer Product is Useful
+
+1. **Rank-1 Matrices**: The outer product of two non-zero vectors always produces a rank-1 matrix, which is fundamental in matrix decompositions and low-rank approximations.
+
+2. **Matrix Factorization**: Used in SVD (Singular Value Decomposition), QR decomposition, and other factorization techniques where matrices are decomposed into sums of rank-1 matrices.
+
+3. **Tensor Operations**: Foundation for tensor products in higher dimensions, essential in quantum mechanics, machine learning (tensor networks), and multilinear algebra.
+
+4. **Machine Learning & Data Science**:
+   - **Feature Interactions**: Creating interaction terms in recommendation systems and collaborative filtering
+   - **Low-Rank Approximations**: Approximating large matrices with sums of outer products
+   - **Matrix Completion**: Filling in missing values in matrices using rank-1 components
+   - **Neural Networks**: Some architectures use outer products for attention mechanisms
+
+5. **Signal Processing**: 
+   - **Correlation Matrices**: Computing autocorrelation and cross-correlation
+   - **Covariance Calculations**: Building covariance matrices from data vectors
+
+6. **Quantum Mechanics**: Essential in tensor product spaces for describing composite quantum systems.
+
+7. **Computer Graphics**: Creating transformation matrices and basis matrices from basis vectors.
+
+8. **Key Differences from Dot Product**:
+   - **Dot Product**: Takes two vectors → returns a **scalar** (a · b)
+   - **Outer Product**: Takes two vectors → returns a **matrix** (a ⊗ b)
+   - The outer product can be computed as: `a ⊗ b = a.reshape(-1, 1) @ b.reshape(1, -1)`
+
+9. **Properties**:
+   - **(a ⊗ b)^T = b ⊗ a** - Transpose property
+   - **(a + b) ⊗ c = a ⊗ c + b ⊗ c** - Distributive property
+   - **(ka) ⊗ b = k(a ⊗ b)** - Scalar multiplication
+
+See the [outer product example](./outer_product/outer_product_example.py) for more detailed demonstrations.
+
 ### Null Space, Nullity, and Kernel
 
 The **null space** (also called **kernel**) of a matrix A is the set of all vectors **x** such that **Ax = 0**. The **nullity** is the dimension of the null space.
@@ -957,3 +1028,72 @@ reconstructed = P @ D @ P_inv
     - A matrix is **not diagonalizable** (defective) if it has repeated eigenvalues but not enough linearly independent eigenvectors
 
 See the [diagonalization example](./diagonalization/diagonalization_example.py) for more detailed demonstrations.
+
+### Singular Value Decomposition (SVD)
+
+**Singular Value Decomposition (SVD)** is a fundamental matrix factorization technique that decomposes any matrix into three components, revealing its essential structure. For any matrix **A** (m×n), SVD decomposes it as: **A = U Σ V^T**, where **U** and **V** are orthogonal matrices, and **Σ** contains the singular values.
+
+#### Example
+
+Given a matrix:
+```
+A = [[1, 2],
+     [3, 4]]
+```
+
+SVD decomposes it into:
+- **U**: Left singular vectors (orthogonal matrix)
+- **S**: Singular values [5.46, 0.37] (in descending order)
+- **V^T**: Right singular vectors (orthogonal matrix, transposed)
+
+In NumPy:
+```python
+import numpy as np
+
+A = np.array([[1, 2],
+              [3, 4]])
+
+U, S, Vt = np.linalg.svd(A, full_matrices=False)
+# Reconstruct: A = U @ np.diag(S) @ Vt
+```
+
+#### Why SVD is Useful
+
+1. **Universal Decomposition**: Works for any matrix (square, rectangular, singular, non-singular), unlike eigenvalue decomposition which only works for square matrices.
+
+2. **Low-Rank Approximation**: Keep only the k largest singular values to approximate a matrix, useful for:
+   - **Image Compression**: Represent images with fewer components
+   - **Data Compression**: Reduce storage while preserving important information
+   - **Noise Reduction**: Remove components with small singular values
+
+3. **Dimensionality Reduction**: 
+   - **PCA (Principal Component Analysis)**: SVD is the mathematical foundation
+   - **Feature Extraction**: Reduce dimensionality in machine learning
+   - **Latent Semantic Analysis**: Topic modeling in text analysis
+
+4. **Matrix Analysis**:
+   - **Rank Calculation**: Number of non-zero singular values equals matrix rank
+   - **Condition Number**: Ratio of largest to smallest singular value (measures numerical stability)
+   - **Pseudoinverse**: Compute Moore-Penrose pseudoinverse for non-square matrices
+
+5. **Machine Learning & Data Science**:
+   - **Recommendation Systems**: Matrix factorization (Netflix, Amazon use SVD-based collaborative filtering)
+   - **Collaborative Filtering**: User-item interaction matrices
+   - **Neural Networks**: Initialization, compression, and regularization
+   - **Feature Extraction**: Extract principal components from data
+
+6. **Signal Processing**:
+   - **Noise Reduction**: Filter out small singular values
+   - **Image Processing**: Compression, denoising, and feature extraction
+
+7. **Scientific Computing**:
+   - **Solving Least Squares**: Overdetermined/underdetermined linear systems
+   - **Numerical Stability**: More stable than eigenvalue decomposition for non-square matrices
+
+8. **Key Properties**:
+   - Singular values are always non-negative and in descending order
+   - U and V are orthogonal matrices (U^T U = I, V^T V = I)
+   - Singular values of A and A^T are the same
+   - Best low-rank approximation in terms of Frobenius norm
+
+See the [SVD example](./svd/svd_example.py) for more detailed demonstrations.
