@@ -1097,3 +1097,44 @@ U, S, Vt = np.linalg.svd(A, full_matrices=False)
    - Best low-rank approximation in terms of Frobenius norm
 
 See the [SVD example](./svd/svd_example.py) for more detailed demonstrations.
+
+### Principal Component Analysis (PCA)
+
+**Principal Component Analysis (PCA)** is a dimensionality reduction technique that finds directions of maximum variance in the data and projects the data onto these directions (principal components).
+
+#### Steps (from scratch)
+
+1. **Center the data**: Subtract the mean of each feature (column).
+2. **Covariance matrix**: \( C = \frac{1}{n-1} X_{centered}^T X_{centered} \).
+3. **Eigen decomposition**: Eigenvalues and eigenvectors of \( C \); eigenvectors = principal directions.
+4. **Sort** by eigenvalue (descending); first eigenvector = first principal component (PC1).
+5. **Project**: \( X_{proj} = X_{centered} \, W_k \), where \( W_k \) = first \( k \) eigenvectors (as columns).
+6. **Explained variance ratio**: \( \lambda_i / \sum_j \lambda_j \) for each component.
+
+#### Example
+
+```python
+import numpy as np
+
+X = np.array([[1, 2], [2, 4], [3, 6], [4, 8]])
+mean = np.mean(X, axis=0)
+X_centered = X - mean
+cov = (X_centered.T @ X_centered) / (X.shape[0] - 1)
+eigenvalues, eigenvectors = np.linalg.eig(cov)
+eigenvalues, eigenvectors = np.real(eigenvalues), np.real(eigenvectors)
+idx = np.argsort(eigenvalues)[::-1]
+eigenvectors = eigenvectors[:, idx]
+# Project onto first PC
+pc1 = eigenvectors[:, 0:1]
+X_projected = X_centered @ pc1
+```
+
+#### Why PCA is Useful
+
+1. **Dimensionality reduction**: Fewer features while retaining most variance.
+2. **Visualization**: Project data to 2D/3D for plotting.
+3. **Noise reduction**: Drop components with small eigenvalues.
+4. **Decorrelation**: Principal components are orthogonal (uncorrelated).
+5. **Machine learning**: Feature extraction, preprocessing, and handling multicollinearity.
+
+See the [PCA example](./pca/pca_example.py) for more detailed demonstrations.
